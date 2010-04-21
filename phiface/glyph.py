@@ -4,6 +4,14 @@ from circle import Circle
 
 PHI = 1.618
 
+glyphs = {}
+
+def glyph(g):
+    def wrap(cls):
+        glyphs[g] = cls
+        return cls
+    return wrap
+
 class Glyph(object):
     def __init__(self, x, y, capHeight=50):
         super(Glyph, self).__init__()
@@ -42,6 +50,7 @@ class Glyph(object):
             height = self.xHeight()
         return (x + (self.width() * ix), y - (height * iy))
 
+@glyph('A')
 class AGlyph(Glyph):
     def __init__(self, x, y, capHeight):
         super(AGlyph, self).__init__(x, y, capHeight)
@@ -66,6 +75,7 @@ class AGlyph(Glyph):
 
         return [leftLine, rightLine, midLine]#, fillLine]
 
+@glyph('E')
 class EGlyph(Glyph):
     def __init__(self, x, y, capHeight):
         super(EGlyph, self).__init__(x, y, capHeight)
@@ -90,6 +100,7 @@ class EGlyph(Glyph):
 
         return [leftLine, topLine, midLine, bottomLine]
 
+@glyph('F')
 class FGlyph(Glyph):
     def __init__(self, x, y, capHeight):
         super(FGlyph, self).__init__(x, y, capHeight)
@@ -112,6 +123,7 @@ class FGlyph(Glyph):
 
         return [leftLine, topLine, midLine]
 
+@glyph('H')
 class HGlyph(Glyph):
     def __init__(self, x, y, capHeight):
         super(HGlyph, self).__init__(x, y, capHeight)
@@ -536,35 +548,3 @@ class zGlyph(Glyph):
                           self.p(1.0, 0.0, xHeight=True),
                           self.weight(), shift="up", serif=1)
         return [topLine, slashLine, bottomLine]
-
-glyphs = {
-    "A": AGlyph,
-    "E": EGlyph,
-    "F": FGlyph,
-    "H": HGlyph,
-    "I": IGlyph,
-    "K": KGlyph,
-    "L": LGlyph,
-    "M": MGlyph,
-    "N": NGlyph,
-    "O": OGlyph,
-    "T": TGlyph,
-    "V": VGlyph,
-    "W": WGlyph,
-    "X": XGlyph,
-    "Y": YGlyph,
-    "Z": ZGlyph,
-    "a": aGlyph,
-    "b": bGlyph,
-    "d": dGlyph,
-    "i": iGlyph,
-    "l": lGlyph,
-    "o": oGlyph,
-    "p": pGlyph,
-    "q": qGlyph,
-    "t": tGlyph,
-    "v": vGlyph,
-    "w": wGlyph,
-    "x": xGlyph,
-    "z": zGlyph
-}
